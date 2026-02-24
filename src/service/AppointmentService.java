@@ -1,26 +1,42 @@
 package service;
 
-import java.util.LinkedList;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 public class AppointmentService {
+    private final LinkedList<String> appointments = new LinkedList<>();
 
-    private LinkedList<String> appointments = new LinkedList<>();
-
-    public void initializeAppointments() {
-        // TODO: Add 3 normal appointments
-        // TODO: Add 1 urgent appointment at the beginning
+    public void seed() {
+        appointments.clear();
+        appointments.add("10:00 - Advisor meeting (Aibek)");
+        appointments.add("11:00 - Advisor meeting (Bektur)");
+        appointments.add("12:00 - Advisor meeting (Dinara)");
     }
 
-    public void cancelLast() {
-        // TODO: Remove last appointment
+    public void addUrgentAppointmentAtBeginning(String urgentAppointment) {
+        appointments.addFirst(urgentAppointment);
+    }
+
+    public void cancelLastAppointment() {
+        if (!appointments.isEmpty()) {
+            appointments.removeLast();
+        }
     }
 
     public void showFirstAndLast() {
-        // TODO: Print first and last appointment
+        if (appointments.isEmpty()) {
+            System.out.println("No appointments.");
+            return;
+        }
+        System.out.println("First appointment: " + appointments.getFirst());
+        System.out.println("Last appointment: " + appointments.getLast());
     }
 
-    public void printAppointments() {
-        // TODO: Traverse using Iterator
+    public void printAllWithIterator() {
+        System.out.println("All appointments (Iterator):");
+        Iterator<String> it = appointments.iterator();
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        }
     }
 }
